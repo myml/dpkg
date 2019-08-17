@@ -1,4 +1,4 @@
-module dpkg-archver
+module gitlab.deepin.io/golang-public/dpkg
 
 go 1.12
 
