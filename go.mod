@@ -1,10 +1,11 @@
-module gitlab.deepin.io/golang-public/dpkg
+module github.com/myml/dpkg
 
 go 1.12
 
 require (
 	github.com/blakesmith/ar v0.0.0-20190502131153-809d4375e1fb
 	github.com/dsnet/compress v0.0.1 // indirect
+	github.com/frankban/quicktest v1.4.1 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/mholt/archiver v3.1.1+incompatible
 	github.com/nwaples/rardecode v1.0.0 // indirect
