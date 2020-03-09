@@ -58,7 +58,7 @@ func Parse(r io.Reader) ([]*Package, error) {
 	var buf strings.Builder
 	for scanner.Scan() {
 		line := scanner.Text()
-		if len(line) > 0 && line[0] == ' ' {
+		if len(line) > 0 && (line[0] == ' ' || line[0] == '\t') {
 			buf.WriteByte('\n')
 			buf.WriteString(line)
 			continue
