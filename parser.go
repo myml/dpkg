@@ -50,6 +50,13 @@ func fromMap(m map[string]string) *Package {
 	return &pkg
 }
 
+func ParseLine(fullline string) (string, string) {
+	index := strings.IndexByte(fullline, ':')
+	key, value := strings.TrimSpace(fullline[:index]), strings.TrimSpace(fullline[index+1:])
+	key = strings.ReplaceAll(key, "-", "")
+	return key, value
+}
+
 // Parse package info
 func Parse(r io.Reader) ([]*Package, error) {
 	scanner := bufio.NewScanner(r)
@@ -64,10 +71,7 @@ func Parse(r io.Reader) ([]*Package, error) {
 			continue
 		}
 		if buf.Len() > 0 {
-			fullline := buf.String()
-			index := strings.IndexByte(fullline, ':')
-			key, value := strings.TrimSpace(fullline[:index]), strings.TrimSpace(fullline[index+1:])
-			key = strings.ReplaceAll(key, "-", "")
+			key, value := ParseLine(buf.String())
 			pkg[key] = value
 		}
 		buf.Reset()
@@ -77,6 +81,8 @@ func Parse(r io.Reader) ([]*Package, error) {
 			pkg = make(map[string]string)
 		}
 	}
+	key, value := ParseLine(buf.String())
+	pkg[key] = value
 	if len(pkg) > 0 {
 		pkgs = append(pkgs, fromMap(pkg))
 	}
